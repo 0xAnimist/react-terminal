@@ -1,5 +1,5 @@
 html {
-  background: linear-gradient( -90deg, rgb(156, 154, 154) 10%, rgb(75, 71, 71) 90% );
+  background: rgb(24, 24, 24);
 }
 ::-webkit-scrollbar {
   width: 0px;

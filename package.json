@@ -1,7 +1,7 @@
 {
-  "name": "react-terminal-app",
-  "version": "1.6.9",
-  "description": "A terminal emulator in React",
+  "name": "daemonica-interpreter",
+  "version": "0.0.3",
+  "description": "React interpreter",
   "author": "0xAnimist",
   "homepage": "",
   "repository": {
@@ -43,7 +43,7 @@
     "styled-components": "^5.2.0"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "17.x"
   },
   "devDependencies": {
     "nwb": "0.25.x",

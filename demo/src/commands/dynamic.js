@@ -1,3 +1,6 @@
+import { ascii, dae0 } from "./dae0.js";
+
+
 const getTime = () => {
   const date = new Date()
   const hours = date.getHours()
@@ -7,61 +10,23 @@ const getTime = () => {
 }
 
 const introduction = [
-  `Welcome to 一个坏掉的番茄.`,
+  ascii[0],ascii[1], ascii[2],ascii[3],ascii[4], ascii[5], ascii[6], ascii[7], ascii[8], ascii[9], ascii[10], ascii[11], ascii[12], ascii[13], ascii[14], ascii[15], ascii[16], ascii[17], ascii[18], ascii[19], ascii[20], ascii[21], ascii[22], ascii[23], ascii[24], ascii[25], ascii[26], ascii[27], ascii[28], ascii[29], ascii[30], ascii[31], ascii[32], ascii[33], ascii[34],
   {
     type: 'system',
-    label: 'System',
-    content: `cd 一个坏掉的番茄`
+    label: 'using',
+    content: 'OccultMath for *'
   },
   {
+    time: getTime(),
     type: 'system',
-    label: 'System',
-    content: 'Thanks for your visit, let me introduce myself.'
+    label: 'loaded',
+    content: 'Entity contract at 0xa8d49c33ea2d86ec5ea8b8a4dd816eb5a64400E4'
   },
   {
     time: getTime(),
-    type: 'info',
-    label: 'Name:',
-    content: 'Simon Ma'
-  },
-  {
-    time: getTime(),
-    type: 'info',
-    label: 'Sex:',
-    content: 'Male'
-  },
-  {
-    time: getTime(),
-    type: 'info',
-    label: 'Age:',
-    content: '23'
-  },
-  {
-    time: getTime(),
-    type: 'info',
-    label: 'Email:',
-    content: 'simon@tomotoes.com'
-  },
-  {
-    time: getTime(),
-    type: 'info',
-    label: 'Aim:',
-    content: 'Three goals as follows:'
-  },
-  {
-    type: 'black',
-    label: '=> 1.',
-    content: 'To make outstanding contributions to open source.'
-  },
-  {
-    type: 'black',
-    label: '=> 2.',
-    content: 'Become a full stack engineer.'
-  },
-  {
-    type: 'black',
-    label: '=> 3.',
-    content: 'Find a good job.'
+    type: 'system',
+    label: 'loaded',
+    content: 'Xe.ntity contract at 0xa8d49c33ea2d86ec5ea8b8a4dd816eb5a64400E4'
   }
 ]
 
@@ -76,9 +41,9 @@ export default {
           i++
           if (!introduction[i]) {
             clearInterval(interval)
-            resolve({ type: 'success', label: 'Done', content: 'Myself introduction is over!' })
+            resolve({ time: getTime(), type: 'success', label: 'ready', content: 'daemonica interpreter 0.0.1 ready' })
           }
-        }, 500)
+        }, 50)
       })
     }
   },

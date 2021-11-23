@@ -12,10 +12,6 @@ import {
   StyledBlinkCursor,
   StyledCommand,
   StyledLine,
-  StyledHeader,
-  StyledHeaderTitle,
-  StyledHeaderDotList,
-  StyledHeaderDotItem,
 } from './style'
 
 import {
@@ -46,8 +42,8 @@ class Terminal extends PureComponent {
     className: 'react-terimnal-app',
     config: {
       initialDirectory: 'src',
-      prompt: '➜  ~ ',
-      version: '1.0.0',
+      prompt: 'ツ  $ ',
+      version: '0.0.1',
       bootCmd: 'intro'
     }
   }
@@ -260,14 +256,6 @@ class Terminal extends PureComponent {
     const { cmdList, isPrinting, command, directory } = this.state
     return (
       <StyledTerminalWrapper className={className}>
-        <StyledHeader>
-          <StyledHeaderTitle>{directory}</StyledHeaderTitle>
-          <StyledHeaderDotList>
-            <StyledHeaderDotItem color="red" />
-            <StyledHeaderDotItem color="yellow" />
-            <StyledHeaderDotItem color="green" />
-          </StyledHeaderDotList>
-        </StyledHeader>
         <StyledTerminal ref={this.$terminal}>
           <StyledTerminalInner onClick={this.inputFocus}>
             <TransitionGroup>
