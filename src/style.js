@@ -4,7 +4,7 @@ export const StyledTerminalWrapper = styled.div`
   position: relative;
   font-size: 0.9em;
   margin: 0 !important;
-  width: 60%;
+  width: 100%;
   max-width: 1200px;
   color: #952f34;
   -webkit-font-smoothing: antialiased;
