@@ -7726,7 +7726,7 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dom@^16.13.1", "react-dom@>= 16.8.0", "react-dom@>=16.6.0":
+"react-dom@^16.13.1", "react-dom@>= 16.8.0", "react-dom@>=16", "react-dom@>=16.6.0":
   "integrity" "sha1-wb03MxoEhsB47lTEdAcgmTsuDn8="
   "resolved" "https://registry.npm.taobao.org/react-dom/download/react-dom-16.13.1.tgz?cache=0&sync_timestamp=1598612809073&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.13.1.tgz"
   "version" "16.13.1"
@@ -7756,7 +7756,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.13.1", "react@>= 16.8.0", "react@>=16.6.0":
+"react@^16.13.1", "react@>= 16.8.0", "react@>=16", "react@>=16.6.0":
   "integrity" "sha1-LoGIIvGpdDEiwGPWQQ2FweOv5I4="
   "resolved" "https://registry.npm.taobao.org/react/download/react-16.13.1.tgz?cache=0&sync_timestamp=1598612808445&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.13.1.tgz"
   "version" "16.13.1"
@@ -7764,6 +7764,11 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
     "prop-types" "^15.6.2"
+
+"reactjs-popup@^2.0.5":
+  "integrity" "sha512-b5hv9a6aGsHEHXFAgPO5s1Jw1eSkopueyUVxQewGdLgqk2eW0IVXZrPRpHR629YcgIpC2oxtX8OOZ8a7bQJbxA=="
+  "resolved" "https://registry.npmjs.org/reactjs-popup/-/reactjs-popup-2.0.5.tgz"
+  "version" "2.0.5"
 
 "readable-stream@^2.0.0", "readable-stream@^2.0.1", "readable-stream@^2.0.2", "readable-stream@^2.1.5", "readable-stream@^2.2.2", "readable-stream@^2.3.3", "readable-stream@^2.3.6", "readable-stream@~2.3.6", "readable-stream@1 || 2":
   "integrity" "sha1-Hsoc9xGu+BTAT2IlKjamL2yyO1c="

@@ -67,24 +67,25 @@ export const StyledPrompt = styled.span`
 const loadingDots = keyframes`
   0%,
   20% {
-    color: rgba(0, 0, 0, 0);
-    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+    color: #952f34;
+    text-shadow: 0.25em 0 0 #952f34, 0.5em 0 0 #952f34;
   }
   40% {
-    color: white;
-    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+    color: red;
+    text-shadow: 0.25em 0 0 #952f34, 0.5em 0 0 #952f34;
   }
   60% {
-    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);
+    color: #952f34;
+    text-shadow: 0.25em 0 0 #952f34, 0.5em 0 0 #952f34;
   }
   80%,
   100% {
-    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
+    color: red;
+    text-shadow: 0.25em 0 0 #952f34, 0.5em 0 0 #952f34;
   }
 `
 
 export const StyledLoadingCursor = styled.span`
-  font: 300 2.5em Impact;
   animation: ${loadingDots} 500ms steps(5, end) infinite;
 `
 
@@ -96,7 +97,7 @@ const blinkDot = keyframes`
 
 export const StyledBlinkCursor = styled.span`
   margin: 0 0 0 5px;
-  background-color: white;
+  color: #952f34;
   animation: ${blinkDot} 1s step-end infinite;
 `
 
@@ -120,7 +121,8 @@ export const StyledLine = styled.div`
   }
 
   .success {
-    color: #28FE14;
+    color: #0000B2;
+    background: #28FE14;
   }
 
   .error {

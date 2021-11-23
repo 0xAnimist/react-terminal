@@ -23,6 +23,7 @@ import { systemCmdList, tipCmdList } from './commands'
 
 import { setCaretPosition } from './utils'
 
+
 class Terminal extends PureComponent {
   static propTypes = {
     cmd: PropTypes.shape({
@@ -44,7 +45,7 @@ class Terminal extends PureComponent {
       initialDirectory: 'src',
       prompt: 'ツ  $ ',
       version: '0.0.1',
-      bootCmd: 'intro'
+      bootCmd: 'reboot'
     }
   }
 
@@ -275,11 +276,11 @@ class Terminal extends PureComponent {
             </TransitionGroup>
             <StyledInputWrapper ref={this.$inputWrapper} onClick={this.inputFocus} >
               {isPrinting
-                ? (<StyledLoadingCursor>.</StyledLoadingCursor>)
+                ? (<StyledLoadingCursor>░█▓░░</StyledLoadingCursor>)
                 : (<>
                   <StyledPrompt>{prompt}</StyledPrompt>
                   <StyledCommand>{command}</StyledCommand>
-                  <StyledBlinkCursor>&nbsp;</StyledBlinkCursor>
+                  <StyledBlinkCursor>▒</StyledBlinkCursor>
                 </>)}
               <StyledInput value={command} onChange={e => { this.setState({ command: e.target.value }) }}
                 onKeyDown={this.handleCommand} autoFocus ref={this.$inputEl} />

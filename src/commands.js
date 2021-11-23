@@ -1,38 +1,38 @@
 export const systemCmdList = {
   clear: {
     type: 'system',
-    label: 'system',
-    content: 'Type "clear" to clear the terminal screen.',
+    label: 'wizxrd',
+    content: 'type "clear" to clear the terminal screen',
     aliasList: ['clear', 'cls']
   },
   help: {
     type: 'system',
-    label: 'system',
-    content: 'Type "help" for a list of spells.',
+    label: 'wizxrd',
+    content: 'type "help" for a list of spells',
     aliasList: ['help', 'ls']
   },
   exit: {
     type: 'system',
-    label: 'system',
-    content: 'Type "exit" to display a (minimal) clickable interface.',
+    label: 'normie',
+    content: 'type "exit" to display a (minimal) clickable interface',
     aliasList: ['exit', 'back']
   },
   pwd: {
     type: 'system',
-    label: 'system',
-    content: 'Print name of current directory.',
+    label: 'wizxrd',
+    content: 'print name of current directory',
     aliasList: ['pwd']
   },
   cd: {
     type: 'system',
-    label: 'system',
-    content: 'Change current directory.',
+    label: 'wizxrd',
+    content: 'change current directory',
     aliasList: ['cd']
   },
   version: {
     type: 'system',
-    label: 'system',
-    content: 'Print version of the current project.',
+    label: 'wizxrd',
+    content: 'print version of the current project',
     aliasList: ['version']
   }
 }
