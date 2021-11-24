@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Draggable from 'react-draggable';
 
 import {
   StyledTerminalWrapper,
@@ -64,7 +65,8 @@ class Terminal extends PureComponent {
       cmdList: [],
       command: '',
       directory: config.initialDirectory,
-      isPrinting: true
+      isPrinting: true,
+      popups: []
     }
 
     this.supportedCmdList = [
@@ -87,13 +89,26 @@ class Terminal extends PureComponent {
     })
   }
 
+  popup = obj => {
+    alert('yes!')
+
+    this.setState(prevState => ({
+      popups: [...prevState.popups, obj]
+    }));
+  }
+
   run = (command, inputCommand = this.state.command) => {
     const { cmd } = this.props
     this.setState({ isPrinting: true })
     return cmd.dynamicList[command]
       .run(this.print, inputCommand)
-      .then(this.print)
-      .catch(error => {
+      .then(result => {
+        this.print(result[0])
+        if(result.length > 1){
+          this.popup(result[1])
+        }
+
+      }).catch(error => {
         console.error(error)
         this.print(tipCmdList.error)
       }).finally(() => {
@@ -203,7 +218,7 @@ class Terminal extends PureComponent {
     const isStaticCommand = !!cmd.staticList[command]
     const isDynamicCommand = !!cmd.dynamicList[action]
 
-    const { exit, help, clear, pwd, cd, version } = systemCmdList
+    const { exit, help, clear, version } = systemCmdList
     const { unknown, jump, supporting } = tipCmdList
 
     if (exit.aliasList.includes(action)) {
@@ -227,15 +242,6 @@ class Terminal extends PureComponent {
       }
     } else if (clear.aliasList.includes(action)) {
       this.setState({ cmdList: [] })
-    } else if (pwd.aliasList.includes(action)) {
-      this.print(this.state.directory)
-    } else if (cd.aliasList.includes(action)) {
-      if (commandKey) {
-        const directory = commandKey.trim()
-        if (directory && directory.length < 20) {
-          this.setState({ directory })
-        }
-      }
     } else if (version.aliasList.includes(action)) {
       this.print(versionNumber)
     } else if (isStaticCommand) {
@@ -256,38 +262,60 @@ class Terminal extends PureComponent {
     const { className, config: { prompt } } = this.props
     const { cmdList, isPrinting, command, directory } = this.state
     return (
-      <StyledTerminalWrapper className={className}>
-        <StyledTerminal ref={this.$terminal}>
-          <StyledTerminalInner onClick={this.inputFocus}>
-            <TransitionGroup>
-              {cmdList.map((item, index) => (
-                <CSSTransition key={index} timeout={500} >
-                  <StyledLine>
-                    {typeof item === 'string'
-                      ? (<StyledCommand className="cmd">{item}</StyledCommand>)
-                      : (<>
-                        {item.time && (<StyledCommand className="time">{item.time}</StyledCommand>)}
-                        {item.label && (<StyledCommand className={item.type}>{item.label}</StyledCommand>)}
-                        {item.content && (<StyledCommand className="cmd">{item.content}</StyledCommand>)}
-                      </>)}
-                  </StyledLine>
-                </CSSTransition>
-              ))}
-            </TransitionGroup>
-            <StyledInputWrapper ref={this.$inputWrapper} onClick={this.inputFocus} >
-              {isPrinting
-                ? (<StyledLoadingCursor>░█▓░░</StyledLoadingCursor>)
-                : (<>
-                  <StyledPrompt>{prompt}</StyledPrompt>
-                  <StyledCommand>{command}</StyledCommand>
-                  <StyledBlinkCursor>▒</StyledBlinkCursor>
-                </>)}
-              <StyledInput value={command} onChange={e => { this.setState({ command: e.target.value }) }}
-                onKeyDown={this.handleCommand} autoFocus ref={this.$inputEl} />
-            </StyledInputWrapper >
-          </StyledTerminalInner >
-        </StyledTerminal >
-      </StyledTerminalWrapper >
+      <div>
+        <StyledTerminalWrapper className={className}>
+          <StyledTerminal ref={this.$terminal}>
+            <StyledTerminalInner onClick={this.inputFocus}>
+              <TransitionGroup>
+                {cmdList.map((item, index) => (
+                  <CSSTransition key={index} timeout={500} >
+                    <StyledLine>
+                      {typeof item === 'string'
+                        ? (<StyledCommand className="cmd">{item}</StyledCommand>)
+                        : (<>
+                          {item.time && (<StyledCommand className="time">{item.time}</StyledCommand>)}
+                          {item.label && (<StyledCommand className={item.type}>{item.label}</StyledCommand>)}
+                          {item.content && (<StyledCommand className="cmd">{item.content}</StyledCommand>)}
+                        </>)}
+                    </StyledLine>
+                  </CSSTransition>
+                ))}
+              </TransitionGroup>
+              <StyledInputWrapper ref={this.$inputWrapper} onClick={this.inputFocus} >
+                {isPrinting
+                  ? (<StyledLoadingCursor>░█▓░░</StyledLoadingCursor>)
+                  : (<>
+                    <StyledPrompt>{prompt}</StyledPrompt>
+                    <StyledCommand>{command}</StyledCommand>
+                    <StyledBlinkCursor>▒</StyledBlinkCursor>
+                  </>)}
+                <StyledInput value={command} onChange={e => { this.setState({ command: e.target.value }) }}
+                  onKeyDown={this.handleCommand} autoFocus ref={this.$inputEl} />
+              </StyledInputWrapper >
+            </StyledTerminalInner >
+          </StyledTerminal >
+        </StyledTerminalWrapper >
+
+
+        { this.state.popups.map((popup, key) => (
+          <Draggable
+            key={key}
+            axis="both"
+            handle=".handle"
+            defaultPosition={{x: 500, y: 500}}
+            position={null}
+            grid={[25, 25]}
+            scale={1}
+            onStart={this.handleStart}
+            onDrag={this.handleDrag}
+            onStop={this.handleStop}>
+            <div>
+              <div className="handle">Drag from here</div>
+              <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} />
+            </div>
+          </Draggable>
+        ))}
+      </div>
     )
   }
 }

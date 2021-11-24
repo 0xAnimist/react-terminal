@@ -41,7 +41,7 @@ export default {
           i++
           if (!boot[i]) {
             clearInterval(interval)
-            resolve({ type: 'success', label: 'grimoire', content: 'daemonica interpreter 0.0.1 ready' })
+            resolve([{ type: 'success', label: 'grimoire', content: 'daemonica interpreter 0.0.1 ready' }])
           }
         }, 50)
       })
@@ -57,59 +57,7 @@ export default {
           type: 'success',
           content: input
         })
-        resolve({ type: 'success', label: '', content: '' })
-      })
-    }
-  },
-  open: {
-    description: 'Open a specified url in a new tab.',
-    run(print, input) {
-      return new Promise((resolve) => {
-        if (!input) {
-          resolve({ type: 'error', label: 'Error', content: 'a url is required!' })
-          return
-        }
-        if (!input.startsWith('http')) {
-          resolve({ type: 'error', label: 'Error', content: 'Please add `http` prefix!' })
-          return
-        }
-        print({ type: 'success', label: 'Success', content: 'Opening' })
-
-        window.open(input, '_blank')
-        resolve({ type: 'success', label: 'Done', content: 'Page Opened!' })
-      })
-    }
-  },
-  blog: {
-    description: 'Open my blog in a new tab.',
-    run(print) {
-      return new Promise((resolve) => {
-        print({ type: 'success', label: 'Success', content: 'Opening' })
-
-        window.open('https://tomotoes.com/blog', '_blank')
-        resolve({ type: 'success', label: 'Done', content: ':)' })
-      })
-    }
-  },
-  resume: {
-    description: 'Open my resume in a new tab.',
-    run(print) {
-      return new Promise((resolve) => {
-        print({ type: 'success', label: 'Success', content: 'Opening' })
-
-        window.open('https://tomotoes.com/blog/resume', '_blank')
-        resolve({ type: 'success', label: 'Done', content: ':)' })
-      })
-    }
-  },
-  2048: {
-    description: 'Open a 2048 Game in a new tab.',
-    run(print) {
-      return new Promise((resolve) => {
-        print({ type: 'success', label: 'Success', content: 'Opening' })
-
-        window.open('https://tomotoes.com/2048', '_blank')
-        resolve({ type: 'success', label: 'Done', content: 'Game Start!' })
+        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', payload: '<ul><li>svgraphics</li></ul>'}])
       })
     }
   }

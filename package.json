@@ -1,6 +1,6 @@
 {
   "name": "daemonica-interpreter",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "React interpreter",
   "author": "0xAnimist",
   "homepage": "",
@@ -39,6 +39,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prop-types": "^15.7.2",
+    "react-draggable": "^4.4.4",
     "react-transition-group": "^4.4.1",
     "reactjs-popup": "^2.0.5",
     "styled-components": "^5.2.0"

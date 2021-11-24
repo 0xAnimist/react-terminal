@@ -1,7 +1,10 @@
 import styled, { keyframes } from 'styled-components'
 
 export const StyledTerminalWrapper = styled.div`
-  position: relative;
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:1;
   font-size: 0.9em;
   margin: 0 !important;
   width: 100%;

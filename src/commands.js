@@ -17,22 +17,10 @@ export const systemCmdList = {
     content: 'type "exit" to display a (minimal) clickable interface',
     aliasList: ['exit', 'back']
   },
-  pwd: {
-    type: 'system',
-    label: 'wizxrd',
-    content: 'print name of current directory',
-    aliasList: ['pwd']
-  },
-  cd: {
-    type: 'system',
-    label: 'wizxrd',
-    content: 'change current directory',
-    aliasList: ['cd']
-  },
   version: {
     type: 'system',
     label: 'wizxrd',
-    content: 'print version of the current project',
+    content: 'print version of the current grimoire',
     aliasList: ['version']
   }
 }
@@ -53,5 +41,5 @@ export const tipCmdList = {
     label: 'Error',
     content: 'Something went wrong!'
   },
-  supporting: 'Here is a list of supporting command.'
+  supporting: 'a list of supported commands'
 }

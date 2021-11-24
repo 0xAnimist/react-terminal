@@ -14,6 +14,7 @@ const config = {
   bootCmd: 'reboot'
 }
 
+
 ReactDOM.render(
   <React.StrictMode>
     <Terminal className={'fade'} cmd={cmd} config={config} />
