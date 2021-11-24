@@ -90,8 +90,6 @@ class Terminal extends PureComponent {
   }
 
   popup = obj => {
-    alert('yes!')
-
     this.setState(prevState => ({
       popups: [...prevState.popups, obj]
     }));
@@ -304,14 +302,17 @@ class Terminal extends PureComponent {
             handle=".handle"
             defaultPosition={{x: 500, y: 500}}
             position={null}
-            grid={[25, 25]}
+            grid={[5, 5]}
             scale={1}
             onStart={this.handleStart}
             onDrag={this.handleDrag}
             onStop={this.handleStop}>
-            <div>
-              <div className="handle">Drag from here</div>
-              <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} />
+            <div className="draggable-wrapper">
+              <div className="handle"><span className="popup-title">{popup.title}</span><span className="popup-x">x</span></div>
+              <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} style= {{
+                height: popup.height,
+                width: popup.width
+              }}/>
             </div>
           </Draggable>
         ))}

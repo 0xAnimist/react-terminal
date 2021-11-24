@@ -57,7 +57,7 @@ export default {
           type: 'success',
           content: input
         })
-        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', payload: '<ul><li>svgraphics</li></ul>'}])
+        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', width: '200px', height: '10px', title: "entity", payload: '<ul><li>svgraphics</li></ul>'}])
       })
     }
   }
