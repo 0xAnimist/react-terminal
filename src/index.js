@@ -95,17 +95,25 @@ class Terminal extends PureComponent {
     }));
   }
 
-  run = (command, inputCommand = this.state.command) => {
+  closePopup = (idx) => () => {
+    this.setState({
+        popups: this
+            .state
+            .popups
+            .filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  run = (command, inputCommand = this.state.command, params) => {
     const { cmd } = this.props
     this.setState({ isPrinting: true })
     return cmd.dynamicList[command]
-      .run(this.print, inputCommand)
+      .run(this.print, inputCommand, params)
       .then(result => {
         this.print(result[0])
         if(result.length > 1){
           this.popup(result[1])
         }
-
       }).catch(error => {
         console.error(error)
         this.print(tipCmdList.error)
@@ -212,7 +220,10 @@ class Terminal extends PureComponent {
     this.print(`${prompt}${command}`)
     const cmdList = []
 
-    const [action, commandKey] = command.split(' ')
+    const commandArray = command.split(' ')
+    const action = commandArray[0]
+    const commandKey = commandArray[1]
+    const params = commandArray.slice(2)
     const isStaticCommand = !!cmd.staticList[command]
     const isDynamicCommand = !!cmd.dynamicList[action]
 
@@ -245,7 +256,7 @@ class Terminal extends PureComponent {
     } else if (isStaticCommand) {
       this.print(cmd.staticList[command].list)
     } else if (isDynamicCommand) {
-      this.run(action, commandKey)
+      this.run(action, commandKey, params)
     } else if (action.trim()) {
       unknown.content = unknown.contentWithCommand(action)
       this.print([unknown, help])
@@ -295,24 +306,26 @@ class Terminal extends PureComponent {
         </StyledTerminalWrapper >
 
 
-        { this.state.popups.map((popup, key) => (
+        { this.state.popups.map((popup, idx) => (
           <Draggable
-            key={key}
+            key={idx}
             axis="both"
             handle=".handle"
-            defaultPosition={{x: 500, y: 500}}
+            defaultPosition={{x: popup.left, y: 10*idx}}
             position={null}
             grid={[5, 5]}
             scale={1}
             onStart={this.handleStart}
             onDrag={this.handleDrag}
             onStop={this.handleStop}>
-            <div className="draggable-wrapper">
-              <div className="handle"><span className="popup-title">{popup.title}</span><span className="popup-x">x</span></div>
-              <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} style= {{
-                height: popup.height,
-                width: popup.width
-              }}/>
+            <div className="draggable-wrapper" style={{
+              width: popup.width
+            }}>
+              <div className="handle">
+                <div className="popup-title">{popup.title}</div>
+                <div className="popup-x" onClick={this.closePopup(idx)}>x</div>
+              </div>
+              <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} />
             </div>
           </Draggable>
         ))}

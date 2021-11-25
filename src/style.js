@@ -8,7 +8,6 @@ export const StyledTerminalWrapper = styled.div`
   font-size: 0.9em;
   margin: 0 !important;
   width: 100%;
-  max-width: 1200px;
   color: #952f34;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

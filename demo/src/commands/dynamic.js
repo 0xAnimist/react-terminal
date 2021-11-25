@@ -49,15 +49,19 @@ export default {
   },
   echo: {
     description: 'Echoes input.',
-    run(print, input) {
+    run(print, input, params) {
       return new Promise(resolve => {
+        console.log('input:')
+        console.log(input)
         print({
           time: getTime(),
           label: 'Echo',
           type: 'success',
-          content: input
+          content: input + ' ' + params.join(' ')
         })
-        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', width: '200px', height: '10px', title: "entity", payload: '<ul><li>svgraphics</li></ul>'}])
+        const width = 240;
+        const left = window.innerWidth - width - 30;//20px from right side
+        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', left: left, width: width + 'px', title: "entity", payload: '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: monospace; font-size: 14px; }</style><rect width="100%" height="100%" fill="black"></rect><text x="10" y="20" class="base">blah</text></svg>'}])
       })
     }
   }
