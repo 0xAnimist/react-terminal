@@ -1,6 +1,6 @@
 {
   "name": "daemonica-interpreter",
-  "version": "0.1.11",
+  "version": "0.2.8",
   "description": "React interpreter",
   "author": "0xAnimist",
   "homepage": "",
@@ -41,7 +41,6 @@
     "prop-types": "^15.7.2",
     "react-draggable": "^4.4.4",
     "react-transition-group": "^4.4.1",
-    "reactjs-popup": "^2.0.5",
     "styled-components": "^5.2.0"
   },
   "peerDependencies": {

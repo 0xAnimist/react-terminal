@@ -8,7 +8,7 @@ import staticList from './commands/static'
 
 const cmd = { dynamicList, staticList }
 const config = {
-  prompt: '(∩｀-´)⊃━☆ﾟ.*･｡ﾟ ',
+  prompt: '> ',
   version: '0.0.1',
   initialDirectory: '八八',
   bootCmd: 'reboot'

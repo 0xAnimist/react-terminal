@@ -1,6 +1,6 @@
 export default {
   contact: {
-    description: 'Channels to follow.',
+    description: 'Channels to follow\nmore info here\nanother line',
     list: [
       {
         type: 'info',

@@ -1,45 +1,42 @@
 export const systemCmdList = {
   clear: {
-    type: 'system',
-    label: 'wizxrd',
-    content: 'type "clear" to clear the terminal screen',
+    type: 'info',
+    color: 'white',
+    content: 'type <strong>clear</strong> to clear the terminal screen',
     aliasList: ['clear', 'cls']
   },
-  help: {
-    type: 'system',
-    label: 'wizxrd',
-    content: 'type "help" for a list of spells',
-    aliasList: ['help', 'ls']
-  },
   exit: {
-    type: 'system',
-    label: 'normie',
-    content: 'type "exit" to display a (minimal) clickable interface',
-    aliasList: ['exit', 'back']
+    type: 'info',
+    color: 'white',
+    content: 'type <strong>gui</strong> for a (minimal) clickable interface',
+    aliasList: ['exit', 'back', 'gui']
+  },
+  help: {
+    type: 'info',
+    color: 'white',
+    content: 'type <strong>spells</strong> for a list of operations',
+    aliasList: ['help','spells']
   },
   version: {
-    type: 'system',
-    label: 'wizxrd',
-    content: 'print version of the current grimoire',
-    aliasList: ['version']
+    type: 'info',
+    color: 'white',
+    content: 'type <strong>version</strong> print version of the current grimoire',
+    aliasList: ['version', '-v']
   }
 }
 
 export const tipCmdList = {
-  jump: {
-    type: 'system',
-    label: 'System',
-    content: 'Jumping page...'
-  },
   unknown: {
     type: 'error',
-    label: 'Error',
-    contentWithCommand: command => `Command '${command}' not found`
+    label: '(>_<)',
+    color: 'red',
+    contentWithCommand: command => `command <strong>'${command}'</strong> not found`
   },
   error: {
     type: 'error',
-    label: 'Error',
-    content: 'Something went wrong!'
+    label: '(>_<)',
+    color: 'red',
+    content: 'something went wrong'
   },
-  supporting: 'a list of supported commands'
+  supporting: 'Spells allow you to interact with and manipulate the Daemonica universe. They take the form of: <strong>noun verb --param=value</strong>. The use of verbs and params depends on the noun, which are listed below to the left in bright white text. The grey text to the right of each describes what the noun does and whether or not any verbs and params apply and how to use them.\n\n'
 }

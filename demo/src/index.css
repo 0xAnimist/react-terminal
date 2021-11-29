@@ -1,6 +1,15 @@
+
+:root {
+  --black: 24, 24, 24;
+  --white: 246, 246, 246;
+  --yellow: 241, 158, 56;
+}
+
 html {
   background: rgb(24, 24, 24);
+  color: rgba(var(--white), 0.5);
 }
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -19,19 +28,19 @@ html {
   display:block;
   position:relative;
   z-index:2;
-  color: #952f34;
-  background: rgb(24,24,24,0.8);
 }
 
 .draggable-wrapper{
-  border: 1px solid #952f34;
   display: block;
+  float:right;
+  margin:0 20px 20px 0;
 }
 
 .handle{
-  border-bottom: 1px solid #952f34;
   padding:3px;
   cursor: crosshair;
+  color: #777;
+  background: rgb(var(--white),0.8);
 }
 
 .popup-title{

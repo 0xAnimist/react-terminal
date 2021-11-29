@@ -83,8 +83,8 @@ class Terminal extends PureComponent {
   componentDidMount() {
     const { config: { bootCmd } } = this.props
     this.run(bootCmd).then(() => {
-      const { help, clear, exit } = systemCmdList
-      this.print([help, clear, exit])
+      const { help, exit } = systemCmdList
+      this.print([help, exit])
       this.inputFocus()
     })
   }
@@ -145,7 +145,6 @@ class Terminal extends PureComponent {
     const isDKey = e.keyCode === 68
     const isLKey = e.keyCode === 76
     const isCtrlCKey = isCKey && e.ctrlKey && !e.shiftKey
-    const isCtrlDKey = isDKey && e.ctrlKey && !e.shiftKey
     const isCtrlLKey = isLKey && e.ctrlKey && !e.shiftKey
 
     if (isDownKey) {
@@ -178,15 +177,21 @@ class Terminal extends PureComponent {
     }
 
     if (isCtrlCKey) {
-      this.print(`${prompt}${command}`)
+      const commandArray = command.split(' ')
+      const action = commandArray[0]
+      const commandKey = commandArray[1]
+      const params = commandArray.slice(2)
+      this.print(`\n`);//`${prompt}${command}`)
+      const echoCommand = {
+        type: 'system',
+        label: null,
+        color: 'white',
+        content: (commandKey === undefined) ? "<strong>" + action + "</strong>" : "<strong>" + action + " " + commandKey + ' ' + params.join(' ') + "</strong>"
+      }
+      this.print(echoCommand);
+      this.print(`\n`);
       this.setState({ command: '' })
       e.preventDefault()
-    }
-
-    if (isCtrlDKey) {
-      this.print(tipCmdList.jump)
-      e.preventDefault()
-      window.history.go(-1)
     }
 
     if (isCtrlLKey) {
@@ -217,21 +222,30 @@ class Terminal extends PureComponent {
     this.historyCmdList.push(command)
     this.historyCmdIndex = this.historyCmdList.length
 
-    this.print(`${prompt}${command}`)
     const cmdList = []
 
     const commandArray = command.split(' ')
     const action = commandArray[0]
     const commandKey = commandArray[1]
     const params = commandArray.slice(2)
+
+    this.print(`\n`);//`${prompt}${command}`)
+    const echoCommand = {
+      type: 'system',
+      label: null,
+      color: 'white',
+      content: (commandKey === undefined) ? "<strong>" + action + "</strong>" : "<strong>" + action + " " + commandKey + ' ' + params.join(' ') + "</strong>"
+    }
+    this.print(echoCommand);
+    this.print(`\n`);
+
     const isStaticCommand = !!cmd.staticList[command]
     const isDynamicCommand = !!cmd.dynamicList[action]
 
     const { exit, help, clear, version } = systemCmdList
-    const { unknown, jump, supporting } = tipCmdList
+    const { unknown, supporting } = tipCmdList
 
     if (exit.aliasList.includes(action)) {
-      cmdList.push(jump)
       this.print(cmdList)
       window.history.go(-1)
     } else if (help.aliasList.includes(action)) {
@@ -243,7 +257,7 @@ class Terminal extends PureComponent {
         cmdList.push(supporting)
         const supportedCmdList = this.supportedCmdList.map(commandKey => {
           const command = cmd.staticList[commandKey] || cmd.dynamicList[commandKey]
-          return ({ type: 'success', label: commandKey, content: `() => ${command.description}` })
+          return ({ type: 'system', color: 'white', label: commandKey, content: `${command.description}` })
         })
         cmdList.push(...supportedCmdList)
         cmdList.push(clear, exit)
@@ -280,11 +294,11 @@ class Terminal extends PureComponent {
                   <CSSTransition key={index} timeout={500} >
                     <StyledLine>
                       {typeof item === 'string'
-                        ? (<StyledCommand className="cmd">{item}</StyledCommand>)
+                        ? (<StyledCommand className="cmd" color="white" dangerouslySetInnerHTML={{__html: item}}></StyledCommand>)
                         : (<>
                           {item.time && (<StyledCommand className="time">{item.time}</StyledCommand>)}
                           {item.label && (<StyledCommand className={item.type}>{item.label}</StyledCommand>)}
-                          {item.content && (<StyledCommand className="cmd">{item.content}</StyledCommand>)}
+                          {item.content && (<StyledCommand className="cmd" color={item.color} dangerouslySetInnerHTML={{__html: item.content}}></StyledCommand>)}
                         </>)}
                     </StyledLine>
                   </CSSTransition>
@@ -292,7 +306,7 @@ class Terminal extends PureComponent {
               </TransitionGroup>
               <StyledInputWrapper ref={this.$inputWrapper} onClick={this.inputFocus} >
                 {isPrinting
-                  ? (<StyledLoadingCursor>░█▓░░</StyledLoadingCursor>)
+                  ? (<StyledLoadingCursor>...</StyledLoadingCursor>)
                   : (<>
                     <StyledPrompt>{prompt}</StyledPrompt>
                     <StyledCommand>{command}</StyledCommand>
@@ -311,7 +325,7 @@ class Terminal extends PureComponent {
             key={idx}
             axis="both"
             handle=".handle"
-            defaultPosition={{x: popup.left, y: 10*idx}}
+            positionOffset={{x: -20, y: 20}}
             position={null}
             grid={[5, 5]}
             scale={1}
@@ -323,7 +337,7 @@ class Terminal extends PureComponent {
             }}>
               <div className="handle">
                 <div className="popup-title">{popup.title}</div>
-                <div className="popup-x" onClick={this.closePopup(idx)}>x</div>
+                <div className="popup-x" onClick={this.closePopup(idx)}>×</div>
               </div>
               <div className={popup.type} dangerouslySetInnerHTML={{__html: popup.payload}} />
             </div>

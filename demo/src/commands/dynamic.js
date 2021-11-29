@@ -10,24 +10,12 @@ const getTime = () => {
 }
 
 const boot = [
-  ascii[0],ascii[1], ascii[2],ascii[3],ascii[4], ascii[5], ascii[6], ascii[7], ascii[8], ascii[9], ascii[10], ascii[11], ascii[12], ascii[13], ascii[14], ascii[15], ascii[16], ascii[17], ascii[18], ascii[19], ascii[20], ascii[21], ascii[22], ascii[23], ascii[24], ascii[25], ascii[26], ascii[27], ascii[28], ascii[29], ascii[30], ascii[31], ascii[32], ascii[33], ascii[34],
   {
-    time: getTime(),
     type: 'system',
-    label: 'loaded',
-    content: 'entity contract at 0xa8d49c33ea2d86ec5ea8b8a4dd816eb5a64400E4'
+    color: 'white',
+    content: '<strong>Daemonica Grimoire v0.0.1</strong>'
   },
-  {
-    time: getTime(),
-    type: 'system',
-    label: 'loaded',
-    content: 'xe.ntity contract at 0xa8d49c33ea2d86ec5ea8b8a4dd816eb5a64400E4'
-  },
-  {
-    type: 'system',
-    label: 'using',
-    content: 'OccultMath for *'
-  }
+  "\n","\n","\n","\n","\n","\n","\n",
 ]
 
 export default {
@@ -41,27 +29,37 @@ export default {
           i++
           if (!boot[i]) {
             clearInterval(interval)
-            resolve([{ type: 'success', label: 'grimoire', content: 'daemonica interpreter 0.0.1 ready' }])
+            resolve([{ time: getTime(), type: 'system', content: 'interpreter ready' }])
           }
         }, 50)
       })
     }
   },
   echo: {
-    description: 'Echoes input.',
+    description: 'Echoes input\n\n',
     run(print, input, params) {
       return new Promise(resolve => {
-        console.log('input:')
-        console.log(input)
-        print({
-          time: getTime(),
-          label: 'Echo',
-          type: 'success',
-          content: input + ' ' + params.join(' ')
-        })
+
+        let message = input + ' ' + params.join(' ');
+
+
+        const width = 240;
+        const left = window.innerWidth - width - 30;//30px from right side
+        resolve([{label: '(^_^)', type: 'success', color: 'green', content: message }, {type: 'svg', left: left, width: width + 'px', title: "entity", payload: '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: monospace; font-size: 14px; }</style><rect width="100%" height="100%" fill="black"></rect><text x="10" y="20" class="base">blah</text></svg>'}])
+      })
+    }
+  },
+  entity: {
+    description: 'mint the next or multiple entities, render an entity by id, or list your entities by id with the following commands:\n\nentity animo\nentity animo --n=#\nentity manifest --id=#\nentity hodlings\n\n',
+    run(print, input, params) {
+      return new Promise(resolve => {
+
+        let message = input + ' ' + params.join(' ');
+
+
         const width = 240;
         const left = window.innerWidth - width - 30;//20px from right side
-        resolve([{ type: 'success', label: '', content: '' }, {type: 'svg', left: left, width: width + 'px', title: "entity", payload: '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: monospace; font-size: 14px; }</style><rect width="100%" height="100%" fill="black"></rect><text x="10" y="20" class="base">blah</text></svg>'}])
+        resolve([{label: '(^_^)', type: 'success', color: 'green', content: message }, {type: 'svg', left: left, width: width + 'px', title: "entity", payload: '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: monospace; font-size: 14px; }</style><rect width="100%" height="100%" fill="black"></rect><text x="10" y="20" class="base">blah</text></svg>'}])
       })
     }
   }
